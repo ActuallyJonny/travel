@@ -5,7 +5,7 @@ require('dotenv').config();
 
 const authRoutes = require('./routes/auth');
 const hotelRoutes = require('./routes/hotel')
-// const searchRoutes = require('./routes/search');
+const searchRoutes = require('./routes/search');
 const { db } = require('./models/user.model');
 const app = express();
 const port = process.env.PORT || 5000;
@@ -15,7 +15,7 @@ app.use(express.json());
 
 app.use('/api', authRoutes);
 app.use('/hotel', hotelRoutes)
-// app.use('/search', searchRoutes);
+app.use('/search', searchRoutes);
 
 
 const uri = process.env.ATLAS_URI;
