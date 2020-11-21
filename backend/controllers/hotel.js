@@ -7,7 +7,7 @@ exports.browse = (req, res) => {
 }
 
 exports.byId = (req, res) => {
-  let id = req.params.id;
+  let { id }= req.params;
   Hotel.findById(id, function(err, hotel) {
     res.json(hotel);
   });
