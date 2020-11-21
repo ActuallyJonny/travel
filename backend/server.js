@@ -14,8 +14,13 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api', authRoutes);
+// POST: /api/signin to login in with email and password
+// POST: /api/signup to sign up with first name, last name, email, password and password confirmations
 app.use('/hotel', hotelRoutes)
+// GET: /hotel/browse to return all hotels
+// GET: /hotel/:id to return hotel with id = :id
 app.use('/search', searchRoutes);
+// GET: /search/:query to return the hotels with :query in their tags (can be substring)
 
 
 const uri = process.env.ATLAS_URI;
