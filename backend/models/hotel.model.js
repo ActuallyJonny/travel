@@ -38,7 +38,8 @@ const roomSchema = new Schema({
   available: {
     type: Boolean, // true = available, false = unavailable
     required: true,
-  }
+  },
+  price: Number
 })
 
 const hotelSchema = new Schema({
