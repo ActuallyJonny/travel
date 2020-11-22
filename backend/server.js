@@ -19,6 +19,8 @@ app.use('/api', authRoutes);
 app.use('/hotel', hotelRoutes)
 // GET: /hotel/browse to return all hotels
 // GET: /hotel/:id to return hotel with id = :id
+// GET: /hotel/rooms/:id to return all room data for a given hotel
+// GET: /hotel/card/:id to return the name, city, description and minimum room price for a given hotel
 app.use('/search', searchRoutes);
 // GET: /search/:query to return the hotels with :query in their tags (can be substring)
 
