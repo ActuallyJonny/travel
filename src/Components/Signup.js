@@ -1,9 +1,9 @@
 import React, {useState} from "react"
-import './Login.css';
+import './Signup.css';
 import {Link} from "react-router-dom";
 import { useAlert } from 'react-alert'
 
-function Login() {
+function Signup() {
     const http = require('follow-redirects').http;
     const _ = require('lodash')
     const alert = useAlert();
@@ -11,7 +11,7 @@ function Login() {
         'method': 'POST',
         'hostname': 'localhost',
         'port': 5000,
-        'path': '/api/signin',
+        'path': '/api/signup',
         'headers': {
             'Content-Type': 'application/json'
         },
@@ -32,14 +32,17 @@ function Login() {
                 alert.show(_.lowerCase(bodyString))
             }
             else{
-                alert.show("You have been logged in!")
+                alert.show("Signup Successful!")
             }
         });
     });
 
     const initialFormData = Object.freeze({
         email: "",
-        password: ""
+        password: "",
+        fName: "",
+        lName: "",
+        password_confirmation: ""
       });
     const [formData,setFormData] = useState(initialFormData)
     const handleChange = (e) => {
@@ -48,7 +51,7 @@ function Login() {
     const handleSubmit = (e) => {
         e.preventDefault()
         console.log(formData)
-        const postData = JSON.stringify({"email":formData.email,"password":formData.password});
+        const postData = JSON.stringify({"email":formData.email,"password":formData.password,"password_confirmation":formData.password_confirmation,"firstName":formData.fName,"lastName":formData.lName});
 
         req.write(postData);
 
@@ -56,22 +59,22 @@ function Login() {
     }
 
     return (
-        <div className="login">
+        <div className="signup">
                 <Link to="/">
                     <div className = "logo">
-                        <img className="login__logo" src ='./images/logo.png' alt=""/>
+                        <img className="signup__logo" src ='./images/logo.png' alt=""/>
                     </div>
                 </Link>
-                    <div className="login__info">
-                        <input onChange={handleChange} name="email" placeholder="E-mail address" autoFocus={true}></input>
+                    <div className="signup__info">
+                        <input onChange={handleChange} name="fName" placeholder="First Name" autoFocus={true}></input>
+                        <input onChange={handleChange} name="lName" placeholder="Last Name" ></input>
+                        <input onChange={handleChange} name="email" placeholder="E-mail address" ></input>
                         <input onChange={handleChange} name="password"  placeholder="Password"></input>
-                        <button className= "btn btn-primary login__button" onClick={handleSubmit}>Login</button>
-                        <Link to="/signup">
-                            <button className= "btn btn-primary login__button">Sign Up</button>
-                        </Link>
+                        <input onChange={handleChange} name="password_confirmation"  placeholder="Confirm Password"></input>
+                        <button className= "btn btn-primary signup__button" onClick={handleSubmit}>Signup</button>
                     </div>
         </div>
     )
 }
 
-export default Login
+export default Signup

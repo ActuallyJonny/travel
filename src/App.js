@@ -1,49 +1,44 @@
-import logo from './logo.svg';
+
 import './App.css';
 import Navbar from "./Components/Navbar.js";
-<<<<<<< HEAD
 import Login from "./Components/Login.js";
+import Signup from "./Components/Signup.js"
 import About from "./Components/About.js";
-import Home from "./Components/Home.js";
 import {Switch, BrowserRouter as Router, Route} from "react-router-dom";
-function App() {
-=======
 import Home from './Home';
 import SearchResults from './SearchResults';
-
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { transitions, positions, Provider as AlertProvider } from 'react-alert'
+import AlertTemplate from 'react-alert-template-oldschool-dark'
 
 function App()  {
->>>>>>> f18cc12b0684f6b0afe75d31948d32c42a9843a6
   return (
 
     <div className = "app">
-    <Router>
+      <AlertProvider template={AlertTemplate}  >
 
-      <Navbar />
+        <Router>
+          <Switch>
+            <Route path ="/login">
+              <Login />
+            </Route>
+            <Route path ="/signup">
+              <Signup />
+            </Route>
+            <Route path="/about">
+              <Navbar />
+              <About />
+            </Route>
+            <Route path = "/search">
+                <SearchResults />
+            </Route>
+            <Route path = "/">
+              <Navbar />
+              <Home />
+            </Route>
+          </Switch>
 
-      <Switch>
-<<<<<<< HEAD
-        <Route path ="/login">
-          <Login />
-        </Route>
-        <Route path="/about">
-          <Navbar />
-          <About />
-        </Route>
-        <Route path="/">
-          <Navbar />
-=======
-        <Route path = "/search">
-            <SearchResults />
-        </Route>
-        <Route path = "/">
->>>>>>> f18cc12b0684f6b0afe75d31948d32c42a9843a6
-          <Home />
-        </Route>
-      </Switch>
-
-    </Router>
+        </Router>
+      </AlertProvider>
     </div>
   );
 }
