@@ -3,6 +3,7 @@ import './App.css';
 import Navbar from "./Components/Navbar.js";
 import Home from './Home';
 import SearchResults from './SearchResults';
+import Hotel from './Hotel';
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -15,8 +16,11 @@ function App()  {
       <Navbar />
 
       <Switch>
+        <Route path = "/hotel">
+          <Hotel />
+        </Route>
         <Route path = "/search">
-            <SearchResults />
+          <SearchResults />
         </Route>
         <Route path = "/">
           <Home />
