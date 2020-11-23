@@ -26,3 +26,11 @@ exports.card = (req, res) => {
     res.json(cardData);
   });
 }
+
+exports.bookings = (req, res) => {
+  let { hotelId, room } = req.params;
+  Hotel.find({ _id: hotelId }, 'bookings').populate({path: 'bookings', match: {room: room}}).exec(function(err, bookings) {
+    if (err) {res.status(500).json({ error: err })}
+    if (bookings) {res.json(bookings)}
+  });
+}

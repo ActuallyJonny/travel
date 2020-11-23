@@ -1,5 +1,4 @@
 const User = require('../models/user.model.js');
-const Hotel = require('../models/hotel.model.js')
 
 exports.byId = (req, res) => {
   let { userId } = req.params;
@@ -10,7 +9,8 @@ exports.byId = (req, res) => {
 
 exports.bookings = (req, res) => {
   let { userId } = req.params;
-  User.findById(userId, 'bookings', function(err, bookings) {
-    res.json(bookings);
+  User.findById(userId, 'bookings').populate('bookings').exec(function(err, bookings) {
+    if (err) {res.status(500).json({ error: err })}
+    if (bookings) {res.json(bookings)}
   });
 }

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Booking = require('./booking.model.js')
 
 const Schema = mongoose.Schema;
 
@@ -48,7 +49,11 @@ const hotelSchema = new Schema({
   location: addressSchema,
   tags: [String],
   rooms: [roomSchema],
-  desc: String
+  desc: String,
+  bookings: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Booking'
+  }]
 }, {
     timestamps: true,
 }) ;
