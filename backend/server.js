@@ -32,7 +32,7 @@ app.use('/user', userRoutes);
 // GET: /user/booking/:id to return all booking information for a given user
 app.use('/booking', bookingRoutes);
 // POST: /booking/add to create new booking with userId, hotelId, rooom, dates (dates is an array, date format: YYYY-MM-DDT00:00:00.000+00:00)
-
+// POST: /booking/del to delete a booking with bookingId
 
 const uri = process.env.ATLAS_URI;
 mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true });

@@ -25,5 +25,23 @@ exports.add = (req,res) => {
       })
     }
   })
+}
 
+exports.del = (req,res) => {
+  let { bookingId } = req.body;
+  Booking.findByIdAndDelete( bookingId ).exec( (err, booking ) => {
+    if (err) { res.status(500).json({ error: err }) }
+    if (booking) {
+      User.findByIdAndUpdate(booking.userId, {$pull: {bookings: bookingId}}, (err) => {
+        if (err) {res.status(500).json({ error: err})}
+      })
+      Hotel.findByIdAndUpdate(booking.hotelId, {$pull: {bookings: bookingId}}, (err) => {
+        if (err) {res.status(500).json({ error: err})}
+      })
+      res.status(200).json({
+        success: true,
+        deletedBooking: booking
+      })
+    }
+  })
 }
