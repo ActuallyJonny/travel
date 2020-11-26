@@ -1,78 +1,83 @@
-import React from "react"
+import React, {useState, useEffect} from "react"
 import './Home.css'
 import Banner from "./Components/Banner.js"
 import Card from "./Components/Card.js"
 import {Router, Link} from "react-router-dom";
-import { useAlert } from 'react-alert'
 import { useStateValue } from "./Components/StateProvider.js";
-
+let addNew = true;
 function Home() {
   const [{user},dispatch] = useStateValue();
-  
   const http = require('follow-redirects').http;
-  const _ = require('lodash')
-  const alert = useAlert();
-    if (user!==null && user.id!==undefined ){
-      console.log(user.id)
+  const [recomm, setRecomm] = useState('');
+  useEffect(()=>{
+    if (user!=null ){
+      
+      console.log("USER IS>>>",user)
       const options = {
-      'hostname': 'localhost',
-      'port': 5000,
-      'path': '/user/rec/' +user.id,
-      'headers': {
-          'Content-Type': 'application/json'
-      },
-      'maxRedirects': 20
-    };
-    http.get(options, function (res) {
-      const chunks = [];
-      console.log('statusCode:', res.statusCode);
-      console.log('headers:', res.headers);
-      res.on('data', function (chunk) {
-          console.log(chunk)
-          chunks.push(chunk);
-          console.log(chunk)
-      });
+        'hostname': 'localhost',
+        'port': 5000,
+        'path': '/user/rec/' +user.id,
+        'headers': {
+            'Content-Type': 'application/json'
+          },
+        'maxRedirects': 20
+      };
+      http.get(options, function (res) {
+        const chunks = [];
+        console.log('statusCode:', res.statusCode);
+        console.log('headers:', res.headers);
+        res.on('data', function (chunk) {
+            chunks.push(chunk);
+            });
 
-      res.on("end", function (chunk) {
-          const body = Buffer.concat(chunks);
-          const bodyString = body.toString()
-          console.log(bodyString);
-      });
-    });
-    };
+        res.on("end", function (chunk) {
+            const body = Buffer.concat(chunks);
+            const bodyString = body.toString();
+            const jsonbody = JSON.parse(body)
+            if(jsonbody.length===3){
+              handleChange(jsonbody);
+            }
+            console.log(recomm)
+            console.log(bodyString);
+          });
+        });
+     };
+  },[])
 
-    // const initialID = Object.freeze({
-    //     id: ""
-    //   });
-    // const [formData,setID] = useState(initialID)
-    
-    // const handleSubmit = (e) => {
-    //     setID({...formData, [e.target.name]:e.target.value})
-    //     console.log(formData)
-    //     const postData = JSON.stringify({"id":formData.id});
-    // }
+    const handleChange = (jsonbody)=>{
+      setRecomm(jsonbody)
+      }
+  if (!recomm){
+    return (
+      <div className = 'home'>
+      <Banner />
+      <p>Loading</p>
+    </div>
+    )
+  }
   return  (
     <div className = 'home'>
       <Banner />
-      <div id="1"  className = 'home-cards'>
+      {console.log("RECOMM ISS>>",recomm)}
+
+      <div className = 'home-cards'>
         <Card
           src = "https://s3.amazonaws.com/luxe-prod-website/images/Panor-glam-a__Seven_swank_rooms_w.2e16d0ba.fill-1200x600.jpg"
-          title = "Penthouse in Dubai"
-          desc = "Enjoy the luxurious Dubai skyline in a room with a view."
-          price = "₹4,677/night"
+          title = {recomm[0].name}
+          desc = {recomm[0].desc}
+          price = {"₹"+recomm[0].rooms[0].price}
         />
         <Card
           src = "https://bstatic.com/xdata/images/xphoto/1182x887/63486802.jpg?k=6140686925115e16214dd4a6b7ccfdc268e0ea1b38eb7a769ed593fb5bd6f2a2&o=?size=S"
-          title = "Villa + Pool in Goa"
-          desc = "Great amenities and privacy, right by the beach."
-          price = "₹1,312/night"
+          title = {recomm[1].name}
+          desc = {recomm[1].desc}
+          price = {"₹"+recomm[1].rooms[0].price}
         />
         <Card
           src = "https://cf.bstatic.com/images/hotel/max1024x768/153/153006731.jpg"
-          title = "Modern Living in Amsterdam"
-          desc = "Stay well-connected and explore this unique city with comfort."
-          price = "₹2,014/night"
-          id = "1"
+          title = {recomm[2].name}
+          desc = {recomm[2].desc}
+          price = {"₹"+recomm[2].rooms[0].price}
         />
       </div>
     </div>
