@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import './Navbar.css';
 import {Link} from "react-router-dom";
+import { useStateValue } from "./StateProvider.js";
+
 function Navbar() {
+    const[{user},dispatch] = useStateValue();
     const[searchItem, setSearchItem] = useState("");
     const handleChange= (e) => {
         setSearchItem({...searchItem, [e.target.name]: e.target.value.trim()});
@@ -10,6 +13,11 @@ function Navbar() {
         e.preventDefault();
         console.log(searchItem);
     }
+    const logout = () => {
+        dispatch({
+            type: 'REM_USER'
+         });
+    };
     return (
         <div>
             <div className = "navbar" >
@@ -28,9 +36,12 @@ function Navbar() {
                             <strong>Bookings</strong>
                         </div>
                     </Link>
-                    <Link to="/login">
+                    <Link to={!user && "/login"}>
                         <div className="buttons__login">
-                            <strong>Login</strong>
+                            <Link to = {user?"/user":"/login"}>
+                                <strong>Hello {user?.email}</strong>
+                            </Link>
+                                <strong onClick={logout}>{user ?'Sign Out':'Sign in'}</strong>
                             {/* <p style={{fontSize: "0.75rem"}}>Signup</p> */}
                         </div>
                     </Link>

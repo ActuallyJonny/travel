@@ -1,0 +1,28 @@
+export const initialState = {
+     user: {},
+};
+
+
+
+function reducer(state, action) {
+    console.log(action);
+
+    switch (action.type) {
+
+        case "SET_USER":
+            console.log(state.user)
+            return {
+                user: action.item
+            }
+        case "REM_USER":
+            return{
+                user: null,
+            }
+        default:
+            
+            return state;
+    }
+}
+
+export default reducer;
+// 

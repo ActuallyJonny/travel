@@ -1,9 +1,12 @@
 import React, {useState} from "react"
 import './Login.css';
 import {Link} from "react-router-dom";
-import { useAlert } from 'react-alert'
+import { useAlert } from 'react-alert';
+import { useStateValue } from './StateProvider.js';
 
 function Login() {
+
+    const [{}, dispatch] = useStateValue();
     const http = require('follow-redirects').http;
     const _ = require('lodash')
     const alert = useAlert();
@@ -16,7 +19,16 @@ function Login() {
             'Content-Type': 'application/json'
         },
         'maxRedirects': 20
+    }; 
+    const addUser = () => {
+        dispatch({
+            type: 'SET_USER',
+            item: {
+                email: formData.email,
+                password: formData.password
+        }, });
     };
+    
 
     const req = http.request(options, function (res) {
         const chunks = [];
@@ -33,6 +45,7 @@ function Login() {
             }
             else{
                 alert.show("You have been logged in!")
+                addUser()
             }
         });
     });
