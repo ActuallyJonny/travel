@@ -20,36 +20,39 @@ function Login() {
         },
         'maxRedirects': 20
     }; 
-    const addUser = () => {
-        dispatch({
-            type: 'SET_USER',
-            item: {
-                email: formData.email,
-                password: formData.password
-        }, });
-    };
+
     
 
     const req = http.request(options, function (res) {
         const chunks = [];
         res.on("data", function (chunk) {
             chunks.push(chunk);
+            console.log(chunk)
         });
 
-        res.on("end", function (chunk) {
+        res.on("end", function () {
             const body = Buffer.concat(chunks);
-            const bodyString = body.toString()
-            console.log(bodyString);
+            const bodyString = JSON.parse(body)
+            const userID = bodyString.message._id
+            console.log(userID);
             if (res.statusCode!==200){
                 alert.show(_.lowerCase(bodyString))
             }
             else{
                 alert.show("You have been logged in!")
-                addUser()
+                addUser(userID)
             }
         });
     });
-
+    const addUser = (userID) => {
+        dispatch({
+            type: 'SET_USER',
+            item: {
+                email: formData.email,
+                password: formData.password,
+                id: userID
+        }, });
+    };
     const initialFormData = Object.freeze({
         email: "",
         password: ""

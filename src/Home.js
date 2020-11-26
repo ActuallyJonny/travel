@@ -1,56 +1,60 @@
-import React, {useState} from "react"
+import React from "react"
 import './Home.css'
 import Banner from "./Components/Banner.js"
 import Card from "./Components/Card.js"
 import {Router, Link} from "react-router-dom";
 import { useAlert } from 'react-alert'
+import { useStateValue } from "./Components/StateProvider.js";
 
 function Home() {
+  const [{user},dispatch] = useStateValue();
+  
   const http = require('follow-redirects').http;
-    const _ = require('lodash')
-    const alert = useAlert();
-    const options = {
-        'method': 'POST',
-        'hostname': 'localhost',
-        'port': 5000,
-        'path': 'hotel/card/1',
-        'headers': {
-            'Content-Type': 'application/json'
-        },
-        'maxRedirects': 20
+  const _ = require('lodash')
+  const alert = useAlert();
+    if (user!==null && user.id!==undefined ){
+      console.log(user.id)
+      const options = {
+      'hostname': 'localhost',
+      'port': 5000,
+      'path': '/user/rec/' +user.id,
+      'headers': {
+          'Content-Type': 'application/json'
+      },
+      'maxRedirects': 20
+    };
+    http.get(options, function (res) {
+      const chunks = [];
+      console.log('statusCode:', res.statusCode);
+      console.log('headers:', res.headers);
+      res.on('data', function (chunk) {
+          console.log(chunk)
+          chunks.push(chunk);
+          console.log(chunk)
+      });
+
+      res.on("end", function (chunk) {
+          const body = Buffer.concat(chunks);
+          const bodyString = body.toString()
+          console.log(bodyString);
+      });
+    });
     };
 
-    const req = http.request(options, function (res) {
-        const chunks = [];
-        res.on("data", function (chunk) {
-            chunks.push(chunk);
-        });
-
-        res.on("end", function (chunk) {
-            const body = Buffer.concat(chunks);
-            const bodyString = body.toString()
-            console.log(bodyString);
-        });
-    });
-
-    const initialID = Object.freeze({
-        id: ""
-      });
-    const [formData,setID] = useState(initialID)
+    // const initialID = Object.freeze({
+    //     id: ""
+    //   });
+    // const [formData,setID] = useState(initialID)
     
-    const handleSubmit = (e) => {
-        setID({...formData, [e.target.name]:e.target.value})
-        console.log(formData)
-        const postData = JSON.stringify({"id":formData.id});
-
-        req.write(postData);
-
-        req.end();
-    }
+    // const handleSubmit = (e) => {
+    //     setID({...formData, [e.target.name]:e.target.value})
+    //     console.log(formData)
+    //     const postData = JSON.stringify({"id":formData.id});
+    // }
   return  (
     <div className = 'home'>
       <Banner />
-      <div id="1" onClick= {handleSubmit} className = 'home-cards'>
+      <div id="1"  className = 'home-cards'>
         <Card
           src = "https://s3.amazonaws.com/luxe-prod-website/images/Panor-glam-a__Seven_swank_rooms_w.2e16d0ba.fill-1200x600.jpg"
           title = "Penthouse in Dubai"

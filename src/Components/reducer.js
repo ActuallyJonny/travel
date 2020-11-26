@@ -12,7 +12,7 @@ function reducer(state, action) {
         case "SET_USER":
             console.log(state.user)
             return {
-                user: action.item
+                user: action.item,
             }
         case "REM_USER":
             return{
