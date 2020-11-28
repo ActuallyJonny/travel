@@ -22,7 +22,7 @@ exports.rooms = (req, res) => {
 
 exports.card = (req, res) => {
   let { hotelId } = req.params;
-  Hotel.findById(hotelId, 'name location.city desc rooms.price').sort('rooms.price').slice('rooms', 1).exec(function(err,cardData) {
+  Hotel.findById(hotelId, 'name location.city desc rooms.price reviews.rating').sort('rooms.price').slice('rooms', 1).exec(function(err,cardData) {
     res.json(cardData);
   });
 }
