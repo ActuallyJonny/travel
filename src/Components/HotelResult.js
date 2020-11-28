@@ -27,7 +27,13 @@ function HotelResult(
           <div className = 'info-bottom'>
 
             <div className = 'hotelresult-rating'>
-              <StarIcon className = 'hotelresult-star' />
+            {
+                        Array(Math.floor(rating))
+                        .fill()
+                        .map(()=> (
+                          <StarIcon className = 'hotelresult-star' />
+                        ))
+            }
               <p><strong>{rating}</strong></p>
             </div>
 

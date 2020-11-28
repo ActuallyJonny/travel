@@ -6,6 +6,7 @@ import Room from "./Components/Room.js"
 function Hotel(props) {
   const id = props.match.params.id;
   const http = require('follow-redirects').http;
+  const _ = require('lodash')
   const [hotel, setHotel] = useState('');
   console.log(id)
   useEffect(()=>{
@@ -27,14 +28,21 @@ function Hotel(props) {
 
         res.on("end", function (chunk) {
             const body = Buffer.concat(chunks);
-            const bodyString = body.toString();
             const jsonbody = JSON.parse(body)
+            console.log("JSONBODY>>",hotel)
             handleChange(jsonbody);
           });
         });
       },[])
     const handleChange=(jsonbody)=>{
       setHotel(jsonbody);
+    }
+    while (!hotel){
+      return (
+        <div className = 'home'>
+        <p>Loading</p>
+      </div>
+      )
     }
   return  (
     <div className = 'hotel'>
@@ -44,11 +52,11 @@ function Hotel(props) {
       </div>
 
     <div className = 'room'>
-      <Room name = {hotel.room[0].type+"Room"} desc = "1 guest · 1 bed · Wifi · Pool" price = {hotel.rooms[0].price}/>
+      <Room name = {_.capitalize(hotel.rooms[0].type)+" Room"} desc = {hotel.rooms[0].occupancy+ " guest · 1 bed · Wifi · Pool"} price = {hotel.rooms[0].price}/>
 
-      <Room name = {hotel.room[1].type+"Room"} desc = "2 guest · 2 bed · Breakfast included · Wifi · Pool" price = {hotel.rooms[1].price}/>
+      <Room name = {_.capitalize(hotel.rooms[1].type)+" Room"} desc = {hotel.rooms[1].occupancy+ " guest · 2 bed · Breakfast included · Wifi · Pool" }price = {hotel.rooms[1].price}/>
 
-      <Room name = {hotel.room[0].type} desc = "2 guest · 1 bed · Breakfast included · Wifi · Pool" price = {hotel.rooms[2].price}/>
+      <Room name = {_.capitalize(hotel.rooms[2].type)} desc = {hotel.rooms[2].occupancy+ "guest · 1 bed · Breakfast included · Wifi · Pool"} price = {hotel.rooms[2].price}/>
     </div>
 
 
