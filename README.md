@@ -4,13 +4,13 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Commands
 
-In the directory /backend run:
+In the directory `/backend`, run:
 
 ### `node server.js`
 
-This starts the backend server.\\
+This starts the backend server.\
 
-Now in another terminal window, go to the project directory and run:
+Now in another terminal window, navigate to the project directory and run:
 
 ### `npm start`
 
