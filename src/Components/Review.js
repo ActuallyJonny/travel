@@ -1,18 +1,71 @@
-import React from 'react'
+import React, {usest} from 'react'
 import ReactStars from "react-rating-stars-component";
+import "./Review.css"
+import { useStateValue } from "./StateProvider.js";
+import {useAlert} from "react-alert";
 
-function Review({hotel}){
-    console.log("HOTELL>",hotel)
+
+function Review({hotel, hotelid}){
+    const hotelID = hotelid;
+    const [{user},dispatch] = useStateValue();
+    const http = require('follow-redirects').http;
+    const _ = require('lodash')
+    const alert = useAlert();
+    const options = {
+        'method': 'POST',
+        'hostname': 'localhost',
+        'port': 5000,
+        'path': '/hotel/review/del',
+        'headers': {
+            'Content-Type': 'application/json'
+        },
+        'maxRedirects': 20
+    }; 
+
+    
+
+    const req = http.request(options, function (res) {
+        const chunks = [];
+        res.on("data", function (chunk) {
+            chunks.push(chunk);
+        });
+
+        res.on("end", function () {
+            const body = Buffer.concat(chunks);
+            if (res.statusCode!==200){
+                alert.show(_.lowerCase(body.toString()))
+            }
+            else{
+                alert.show("Review deleted successfully!")
+            }
+        });
+    });
+    const deleteReview = () => {
+    const postData = JSON.stringify({"userId":user.id,"hotelId":hotelID})
+    req.write(postData)
+    req.end()
+    }
+
     const rating = parseInt(hotel.rating)
-    console.log(rating)
     const userRating = {
         size: 20,
         value: rating,
         edit: false
       };
-    return (<div className = 'review'>
-    <h3></h3>
     
+      if (user!==null && user.id===hotel.userId){
+          return(
+            <div className = 'review'>
+            <ReactStars {...userRating}></ReactStars>
+            <div>
+            <p className="review__text_1">{hotel.review}</p> <button onClick={deleteReview} className="delete__review"><i class="fas fa-trash-alt"></i></button>
+            <p className="name"><em> -{hotel.userId}</em></p>
+            </div>
+          </div>
+          )
+      }
+    return (
+    <div className = 'review'>
     <ReactStars {...userRating}></ReactStars>
     <div>
     <p>{hotel.review}</p>

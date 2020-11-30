@@ -42,7 +42,7 @@ function EnterReview({hotel}) {
                 alert.show(_.lowerCase(body.toString()))
             }
             else{
-                alert.show("Review posted successfull!")
+                alert.show("Review posted successfully!")
             }
         });
     });
@@ -70,6 +70,7 @@ function EnterReview({hotel}) {
     if( post===true){
         req.write(postData);
         req.end();
+        window.location.reload();
     }
 
   }

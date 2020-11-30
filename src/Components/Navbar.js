@@ -29,12 +29,12 @@ function Navbar() {
             res.on("end", function (chunk) {
                 const body = Buffer.concat(chunks);
                 const jsonbody = JSON.parse(body)
-                console.dir({jsonbody})
                 User_det(jsonbody);
               });
             });
          };
       },[]);
+
     
     const User_det = (jsonbody)=>{
         setUserDet({...user_det, fName:jsonbody.firstName, lName:jsonbody.lastName} )

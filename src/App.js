@@ -36,7 +36,6 @@ function App()  {
                 <SearchResults />
             </Route>
             <Route path="/hotel/:id" render={(props) => <Hotel {...props} />}>
-              {/* <Hotel id= /> */}
             </Route>
             <Route path = "/">
               <Navbar />
