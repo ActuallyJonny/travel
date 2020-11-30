@@ -13,6 +13,7 @@ function Hotel(props) {
   const [hotel, setHotel] = useState('');
   const [room, setRoom] = useState('');
   const [roomPrice, setRoomPrice] = useState('');
+  const array = []
   useEffect(()=>{
       const options = {
         'hostname': 'localhost',
@@ -58,28 +59,49 @@ function Hotel(props) {
         setRoomPrice(hotel.rooms[0].price)
       }
     }
+    let c = 0
+    for (let i=0; i<hotel.rooms.length; i++){
+      if (i==0|| hotel.rooms[i].type!=array[c-1].type){
+        array.push(hotel.rooms[i])
+        c = c + 1;
+      }
+    }
   return  (
     <div className = 'hotel'>
       {console.dir({hotel})}
       <div className = 'hotel-info'>
-        <HotelResult id={room} img = {hotel.image} address = {hotel.location.street+", "+hotel.location.city+", "+hotel.location.state+" "+hotel.location.postcode} name = {hotel.name} desc = {hotel.desc} rating = {4.63} price = {roomPrice}/>
+        <HotelResult id={room} img = {hotel.image} address = {hotel.location.street+", "+hotel.location.city+", "+hotel.location.state+" "+hotel.location.postcode} name = {hotel.name} desc = {hotel.desc} rating = {4.63} price = {roomPrice||hotel.rooms[0].price}/>
       </div>
+
+    <div className = 'heading'>
+      Pick your preferred room.
+    </div>
 
     <div className = 'room'>
       <div onClick = {funct}>
-      <Room name = {_.capitalize(hotel.rooms[0].type)} desc = {hotel.rooms[0].occupancy+ " guest · 1 bed · Wifi · Pool"} price = {hotel.rooms[0].price} id={"0"}/>
+      <Room name = {_.capitalize(array[0].type)} desc = {array[0].occupancy+ " guest"} price = {array[0].price} id={"0"}/>
       </div>
       <div onClick = {funct}>
-      <Room  name = {_.capitalize(hotel.rooms[1].type)} desc = {hotel.rooms[1].occupancy+ " guest · 2 bed · Breakfast included · Wifi · Pool" }price = {hotel.rooms[1].price} id={"1"}/>
+      <Room name = {_.capitalize(array[1].type)} desc = {array[1].occupancy+ " guest" }price = {array[1].price} id={"1"}/>
       </div>
       <div onClick = {funct} >
-      <Room   name = {_.capitalize(hotel.rooms[2].type)} desc = {hotel.rooms[2].occupancy+ "guest · 1 bed · Breakfast included · Wifi · Pool"} price = {hotel.rooms[2].price} id={"2"}/>
+      <Room   name = {_.capitalize(array[2].type)} desc = {array[2].occupancy+ "guest"} price = {array[2].price} id={"2"}/>
       </div>
     </div>
     <div className= 'room'>
+
+    <h3 className="review__heading">Reviews-</h3>
+
+
+    <div className = 'heading'>
+      Reviews
+    </div>
+
+
         {hotel.reviews.map(el => (
             <Review
             hotel={el}
+            hotelID = {hotel._id}
           />
         ))}
     </div>

@@ -1,9 +1,28 @@
 .review {
+    background-color: rgba(72, 191, 145, 0.12);
     margin: 10px;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0px 6px 18px -9px rgba(0, 0, 0, 0.75);
     transition: transform 100ms ease-in;
-    padding: 20px;
+    padding: 10px;
     border: 1;
+  }
+
+  .name{
+      text-align: end;
+  }
+  .review__text_1{
+      display: inline-block;
+  }
+  .delete__review{
+    text-align: end;
+    background-color: white;
+    border: none;
+    color: #132743;
+    position: absolute;
+    right: 30px;
+  }
+  .fas{
+      text-align: end;
   }

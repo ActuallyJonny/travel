@@ -1,11 +1,11 @@
-.navbar__logo{
+.navbar__logo {
     width: 60px;
     object-fit: contain;
     border-radius: 100%;
     background-color: white;
     margin-right: 10px;
 }
-.navbar{
+.navbar {
     background-color:#132743;
     display: flex;
     position: sticky;
@@ -16,14 +16,13 @@
     padding: 5px 5px;
 }
 
-
-.navbar__search{
+.navbar__search {
     display:flex;
     flex: 1;
     margin-right: 10px;
     flex-wrap: nowrap;
 }
-.navbar__search button{
+.navbar__search button {
     height:30px!important;
     width: 30px;
     padding: 5px;
@@ -33,7 +32,7 @@
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
 }
-.search__bar{
+.search__bar {
     padding: 5px;
     height:30px;
     width:100%;
@@ -42,26 +41,31 @@
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
 }
-.search__icon{
+.search__icon {
     height: 50%;
     width: auto;
 }
-.navbar__buttons{
+.navbar__buttons {
     display: flex;
     justify-content: space-evenly;
 }
-.buttons__login, .buttons__bookings, .buttons__about{
+.buttons__login, .buttons__bookings, .buttons__about {
     font-size: 1.7rem;
     font-weight: 900;
     margin: 0px 5px;
-    color: white;
+    color: white; /* blue = #132743 */
     text-shadow: 1px 1px 5px black;
 }
-.hello__user{
+.hello__user {
     text-decoration: none;
     color: white;
     display: block;
 }
-.sign__user{
+.sign__user {
     font-size: 1.25rem;
+    padding-left: 16px;
+}
+
+.divider{
+    color: #48bf91; /*green*/
 }

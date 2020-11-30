@@ -48,7 +48,7 @@ function HotelResult(
             <div className = 'hotelresult-price'>
               <div className = 'hotelresult-book'>
                 <Button onClick = {() => history.push('/')}>
-                  <h5><strong>Book Now</strong></h5>
+                  <h3><strong>Book Now</strong></h3>
                   </Button>
                   <DatePicker
                     selected={startDate}

@@ -47,7 +47,9 @@ function Home() {
     return (
       <div className = 'home'>
       <Banner />
-      <p>No recommendations yet!</p>
+      <div className = 'reco-title'>
+        No recommendations yet! Try making a booking first.
+      </div>
     </div>
 
     )
@@ -56,6 +58,10 @@ function Home() {
     <div className = 'home'>
       <Banner />
       {console.dir({recomm})}
+
+      <div className = 'reco-title'>
+        Recommendations for You
+      </div>
 
       <div className = 'home-cards'>
         <Link to={"/hotel/"+recomm[0]._id}>
