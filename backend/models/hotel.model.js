@@ -46,6 +46,7 @@ const reviewSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User'
   },
+  userName: String,
   review: String,
   rating: Number
 },{

@@ -1,4 +1,5 @@
 const Hotel = require('../models/hotel.model.js');
+const User = require('../models/user.model.js')
 
 exports.browse = (req, res) => {
   Hotel.find({ }, function(err, hotels) {
@@ -46,20 +47,26 @@ exports.rating = (req, res) => {
 
 exports.addReview = (req, res) => {
   let { hotelId, userId, review, rating } = req.body;
-  let newReview = {
-    userId: userId,
-    review: review,
-    rating: rating
-  }
-  Hotel.findByIdAndUpdate(hotelId, { $push: { reviews: newReview }}).select('name').exec( (err, response) => {
+  User.findById(userId, 'firstName').exec( (err, userName) => {
     if (err) {res.status(500).json({ error: err })}
-    if (response) {
-      res.status(200).json({
-        success: true,
-        review: newReview,
-        result: response
-    })}
-  });
+    if (userName) {
+      let newReview = {
+        userId: userId,
+        userName: userName.firstName,
+        review: review,
+        rating: rating
+      }
+      Hotel.findByIdAndUpdate(hotelId, { $push: { reviews: newReview }}).select('name').exec( (err, response) => {
+        if (err) {res.status(500).json({ error: err })}
+        if (response) {
+          res.status(200).json({
+            success: true,
+            review: newReview,
+            result: response
+        })}
+      });
+    }
+  })
 }
 
 exports.delReview = (req, res) => {
