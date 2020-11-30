@@ -89,15 +89,15 @@ function Hotel(props) {
       </div>
     </div>
     <div className= 'room'>
-<<<<<<< HEAD
+
     <h3 className="review__heading">Reviews-</h3>
-=======
+
 
     <div className = 'heading'>
       Reviews
     </div>
 
->>>>>>> 2aef10b28669a71995134b478b1a7b9ade31a0d0
+
         {hotel.reviews.map(el => (
             <Review
             hotel={el}

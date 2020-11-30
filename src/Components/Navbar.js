@@ -35,10 +35,7 @@ function Navbar() {
          };
       },[]);
 
-<<<<<<< HEAD
-    
-=======
->>>>>>> 2aef10b28669a71995134b478b1a7b9ade31a0d0
+
     const User_det = (jsonbody)=>{
         setUserDet({...user_det, fName:jsonbody.firstName, lName:jsonbody.lastName} )
     }
