@@ -8,12 +8,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.reco-title {
+  padding: 30px;
+  padding-left: 46px;
+  padding-bottom: 0px;
+  font-size: 30px;
 }
+
 /*cards*/
 .home-cards {
-    display: flex;
-    padding: 30px;
-  }
+  display: flex;
+  padding: 30px;
+}

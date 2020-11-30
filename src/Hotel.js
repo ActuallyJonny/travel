@@ -65,6 +65,10 @@ function Hotel(props) {
         <HotelResult id={room} img = {hotel.image} address = {hotel.location.street+", "+hotel.location.city+", "+hotel.location.state+" "+hotel.location.postcode} name = {hotel.name} desc = {hotel.desc} rating = {4.63} price = {roomPrice}/>
       </div>
 
+    <div className = 'heading'>
+      Pick your preferred room.
+    </div>
+
     <div className = 'room'>
       <div onClick = {funct}>
       <Room name = {_.capitalize(hotel.rooms[0].type)} desc = {hotel.rooms[0].occupancy+ " guest · 1 bed · Wifi · Pool"} price = {hotel.rooms[0].price} id={"0"}/>
@@ -77,6 +81,11 @@ function Hotel(props) {
       </div>
     </div>
     <div className= 'room'>
+
+    <div className = 'heading'>
+      Reviews
+    </div>
+
         {hotel.reviews.map(el => (
             <Review
             hotel={el}

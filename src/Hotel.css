@@ -10,3 +10,10 @@
 .searchresults-info > h1 {
   margin-bottom: 30px;
   }
+
+.heading {
+  padding-left: 41px;
+  padding-top: 20px;
+  padding-bottom: 0px;
+  font-size: 30px;
+  }

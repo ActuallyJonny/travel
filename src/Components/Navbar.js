@@ -25,7 +25,7 @@ function Navbar() {
             res.on('data', function (chunk) {
                 chunks.push(chunk);
                 });
-    
+
             res.on("end", function (chunk) {
                 const body = Buffer.concat(chunks);
                 const jsonbody = JSON.parse(body)
@@ -35,7 +35,7 @@ function Navbar() {
             });
          };
       },[]);
-    
+
     const User_det = (jsonbody)=>{
         setUserDet({...user_det, fName:jsonbody.firstName, lName:jsonbody.lastName} )
     }
@@ -61,27 +61,37 @@ function Navbar() {
                 </Link>
                 {console.log("user IS>>",user)}
                 <div className="navbar__search">
-                        <input className="search__bar" name="searchItem" type="text" placeholder="Search for Hotels" onChange={handleChange} autoComplete="true"></input>
+                        <input className="search__bar" name="searchItem" type="text" placeholder="Search for Hotels or Locations" onChange={handleChange} autoComplete="true"></input>
                         <button type= "submit" onClick={handleSubmit} name="submit"><i className="search__icon fas fa-search-location"></i></button>
                 </div>
                 <div className = "navbar__buttons">
                     <Link to ="/bookings">
                         <div className="buttons__bookings">
-                            <strong>Bookings</strong>
+                            <strong> Your Bookings </strong>
                         </div>
                     </Link>
+
+                    <div className = 'divider'>
+                      |
+                    </div>
+
                     <Link to={!user?"/login":"/"}>
                         <div className="buttons__login">
                             <Link to = {user?"/user/"+user.id:"/"}>
-                                <strong className="hello__user">Hello {user_det?.fName}</strong>
+                                <strong className="hello__user"> Hello,  {user_det?.fName} </strong>
                             </Link>
                                 <strong  className="sign__user" onClick={logout}>{user?'Sign Out':'Sign in'}</strong>
                             {/* <p style={{fontSize: "0.75rem"}}>Signup</p> */}
                         </div>
                     </Link>
+
+                    <div className = 'divider'>
+                      |
+                    </div>
+
                     <Link to ="/about">
                         <div className = "buttons__about">
-                            <strong>About Us</strong>
+                            <strong> About Us </strong>
                         </div>
                     </Link>
                 </div>
@@ -91,4 +101,3 @@ function Navbar() {
 }
 
 export default Navbar
-
