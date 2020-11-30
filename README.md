@@ -8,7 +8,7 @@ In the directory `/backend`, run:
 
 ### `node server.js`
 
-This starts the backend server.\
+This starts the backend server.
 
 Now in another terminal window, navigate to the project directory and run:
 
