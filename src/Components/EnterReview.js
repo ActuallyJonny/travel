@@ -26,9 +26,9 @@ function EnterReview({hotel}) {
             'Content-Type': 'application/json'
         },
         'maxRedirects': 20
-    }; 
+    };
 
-    
+
 
     const req = http.request(options, function (res) {
         const chunks = [];
@@ -91,11 +91,11 @@ function EnterReview({hotel}) {
   };
   return  (
     <div className = 'review'>
-        <h3>Leave a review here!</h3>
-        
+        <h3>How was your stay? Leave a review here!</h3>
+
         <ReactStars {...stars}></ReactStars>
         <div>
-        <textarea className="review__text" onChange={handleReview} name = 'review' placeholder = "Enter a review for the hotel" type = 'text' />
+        <textarea className="review__text" onChange={handleReview} name = 'review' placeholder = "Describe your experience with this hotel." type = 'text' />
         <p className="chars__left">{char + " characters left"}</p>
         <button id="rev" className="review__post btn btn-success btn-lg" type="review" onClick={postReview}>Post</button>
         </div>

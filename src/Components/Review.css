@@ -1,4 +1,5 @@
 .review {
+    background-color: rgba(72, 191, 145, 0.12);
     margin: 10px;
     border-radius: 10px;
     overflow: hidden;
@@ -7,6 +8,7 @@
     padding: 10px;
     border: 1;
   }
+<<<<<<< HEAD
   .name{
       text-align: end;
   }
@@ -24,3 +26,5 @@
   .fas{
       text-align: end;
   }
+=======
+>>>>>>> 2aef10b28669a71995134b478b1a7b9ade31a0d0

@@ -8,8 +8,6 @@ import "react-date-range/dist/theme/default.css";
 import { DateRangePicker } from "react-date-range";
 import { Button } from "@material-ui/core";
 
-//Might have to replace this Datepicker for some other (or modify it) because this one allows you to pick dates that have already passed
-
 function DatePicker() {
   const history = useHistory();
   const [startdate, setstartdate] = useState(new Date());
