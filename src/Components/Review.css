@@ -8,7 +8,6 @@
     padding: 10px;
     border: 1;
   }
-<<<<<<< HEAD
   .name{
       text-align: end;
   }
@@ -17,7 +16,7 @@
   }
   .delete__review{
     text-align: end;
-    background-color: white;
+    background-color:  inherit;
     border: none;
     color: #132743;
     position: absolute;
@@ -26,5 +25,3 @@
   .fas{
       text-align: end;
   }
-=======
->>>>>>> 2aef10b28669a71995134b478b1a7b9ade31a0d0

@@ -32,8 +32,7 @@ function App()  {
               <Navbar />
               <About />
             </Route>
-            <Route path = "/search">
-                <SearchResults />
+            <Route path = "/search/:query"render={(props) => <SearchResults {...props} />}>
             </Route>
             <Route path="/hotel/:id" render={(props) => <Hotel {...props} />}>
             </Route>

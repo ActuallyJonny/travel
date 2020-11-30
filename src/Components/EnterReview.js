@@ -4,7 +4,7 @@ import {useHistory} from "react-router-dom";
 import React, {useState} from "react";
 import {useStateValue} from "./StateProvider.js";
 import { useAlert } from 'react-alert';
-
+import Review from './Review.js';
 function EnterReview({hotel}) {
 
   const hotelID = hotel._id;
@@ -14,21 +14,19 @@ function EnterReview({hotel}) {
   const [rating, setRating]= useState('');
   const [char, setChar] = useState('250');
   const http = require('follow-redirects').http;
-    const _ = require('lodash')
-    const alert = useAlert();
-    const history = useHistory();
-    const options = {
-        'method': 'POST',
-        'hostname': 'localhost',
-        'port': 5000,
-        'path': '/hotel/review/add',
-        'headers': {
-            'Content-Type': 'application/json'
-        },
-        'maxRedirects': 20
-    };
-
-
+  const _ = require('lodash')
+  const alert = useAlert();
+  const history = useHistory();
+  const options = {
+      'method': 'POST',
+      'hostname': 'localhost',
+      'port': 5000,
+      'path': '/hotel/review/add',
+      'headers': {
+          'Content-Type': 'application/json'
+      },
+      'maxRedirects': 20
+  };
 
     const req = http.request(options, function (res) {
         const chunks = [];
@@ -38,6 +36,7 @@ function EnterReview({hotel}) {
 
         res.on("end", function () {
             const body = Buffer.concat(chunks);
+            console.log(JSON.parse(body))
             if (res.statusCode!==200){
                 alert.show(_.lowerCase(body.toString()))
             }
@@ -50,6 +49,9 @@ function EnterReview({hotel}) {
     setReview(e.target.value);
     if (review){
         setChar(250-review.length)
+    }
+    else{
+      setChar(250)
     }
   }
   const postReview = (e) => {
@@ -70,16 +72,14 @@ function EnterReview({hotel}) {
     if( post===true){
         req.write(postData);
         req.end();
-        window.location.reload();
     }
-
   }
   const stars = {
     size: 50,
     count: 5,
     color: "grey",
     activeColor: "#48bf91",
-    value: 7.5,
+    value: 0,
     a11y: true,
     isHalf: true,
     emptyIcon: <i className="far fa-star" />,
@@ -90,14 +90,14 @@ function EnterReview({hotel}) {
     }
   };
   return  (
-    <div className = 'review'>
+    <div className = 'review__enter'>
         <h3>How was your stay? Leave a review here!</h3>
 
         <ReactStars {...stars}></ReactStars>
         <div>
         <textarea className="review__text" onChange={handleReview} name = 'review' placeholder = "Describe your experience with this hotel." type = 'text' />
         <p className="chars__left">{char + " characters left"}</p>
-        <button id="rev" className="review__post btn btn-success btn-lg" type="review" onClick={postReview}>Post</button>
+        <button id="rev" className="review__post btn btn-success btn-lg" type="review" onClick={postReview} >Post</button>
         </div>
       </div>
     )

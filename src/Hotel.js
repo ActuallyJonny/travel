@@ -14,6 +14,7 @@ function Hotel(props) {
   const [room, setRoom] = useState('');
   const [roomPrice, setRoomPrice] = useState('');
   const array = []
+  let avgReview=0;
   useEffect(()=>{
       const options = {
         'hostname': 'localhost',
@@ -66,11 +67,14 @@ function Hotel(props) {
         c = c + 1;
       }
     }
+    for (let i=0; i<hotel.reviews.length; i++ ){
+      avgReview = avgReview + (hotel.reviews[i].rating/hotel.reviews.length)
+    }
   return  (
     <div className = 'hotel'>
       {console.dir({hotel})}
       <div className = 'hotel-info'>
-        <HotelResult id={room} img = {hotel.image} address = {hotel.location.street+", "+hotel.location.city+", "+hotel.location.state+" "+hotel.location.postcode} name = {hotel.name} desc = {hotel.desc} rating = {4.63} price = {roomPrice||hotel.rooms[0].price}/>
+        <HotelResult hotelid={hotel._id} id={array[room]?.number||array[room]} img = {hotel.image} address = {hotel.location.street+", "+hotel.location.city+", "+hotel.location.state+" "+hotel.location.postcode} name = {hotel.name} desc = {hotel.desc} rating = {avgReview} price = {roomPrice||hotel.rooms[0].price}/>
       </div>
 
     <div className = 'heading'>
@@ -85,23 +89,19 @@ function Hotel(props) {
       <Room name = {_.capitalize(array[1].type)} desc = {array[1].occupancy+ " guest" }price = {array[1].price} id={"1"}/>
       </div>
       <div onClick = {funct} >
-      <Room   name = {_.capitalize(array[2].type)} desc = {array[2].occupancy+ "guest"} price = {array[2].price} id={"2"}/>
+      <Room   name = {_.capitalize(array[2].type)} desc = {array[2].occupancy+ " guest"} price = {array[2].price} id={"2"}/>
       </div>
     </div>
     <div className= 'room'>
-<<<<<<< HEAD
-    <h3 className="review__heading">Reviews-</h3>
-=======
 
     <div className = 'heading'>
       Reviews
     </div>
 
->>>>>>> 2aef10b28669a71995134b478b1a7b9ade31a0d0
         {hotel.reviews.map(el => (
             <Review
-            hotel={el}
-            hotelID = {hotel._id}
+            hotel1={el}
+            hotel1ID={hotel._id}
           />
         ))}
     </div>

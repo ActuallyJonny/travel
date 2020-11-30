@@ -5,8 +5,10 @@ import { useStateValue } from "./StateProvider.js";
 import {useAlert} from "react-alert";
 
 
-function Review({hotel, hotelid}){
-    const hotelID = hotelid;
+function Review({hotel1, hotel1ID}){
+    const hotel = hotel1;
+    const hotelID = hotel1ID;
+    console.log(hotel.userName,hotelID)
     const [{user},dispatch] = useStateValue();
     const http = require('follow-redirects').http;
     const _ = require('lodash')
@@ -41,7 +43,9 @@ function Review({hotel, hotelid}){
         });
     });
     const deleteReview = () => {
-    const postData = JSON.stringify({"userId":user.id,"hotelId":hotelID})
+    const postData = JSON.stringify({"hotelId":hotelID, "userId":user.id})
+    console.log(hotelID)
+    console.log(postData)
     req.write(postData)
     req.end()
     }
@@ -59,7 +63,7 @@ function Review({hotel, hotelid}){
             <ReactStars {...userRating}></ReactStars>
             <div>
             <p className="review__text_1">{hotel.review}</p> <button onClick={deleteReview} className="delete__review"><i class="fas fa-trash-alt"></i></button>
-            <p className="name"><em> -{hotel.userId}</em></p>
+            <p className="name"><em> -{hotel.userName}</em></p>
             </div>
           </div>
           )
@@ -69,7 +73,7 @@ function Review({hotel, hotelid}){
     <ReactStars {...userRating}></ReactStars>
     <div>
     <p>{hotel.review}</p>
-    <p className="name"><em> -{hotel.userId}</em></p>
+    <p className="name"><em> -{hotel.userName}</em></p>
     </div>
   </div>
     )
