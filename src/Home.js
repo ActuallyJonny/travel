@@ -45,10 +45,10 @@ function Home() {
       }
   if (!recomm){
     return (
-      <div className = 'home'>
+      <div className = 'home1'>
       <Banner />
       <div className = 'reco-title'>
-        No recommendations yet! Try making a booking first.
+        <p className="no-reco">No recommendations yet! Try <a href="/login">logging in</a> or making a booking first.</p>
       </div>
     </div>
 

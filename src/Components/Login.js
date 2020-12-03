@@ -85,9 +85,9 @@ function Login() {
                     <div className="login__info">
                         <input onChange={handleChange} name="email" placeholder="E-mail address" autoFocus={true}></input>
                         <input onChange={handleChange} name="password"  placeholder="Password"></input>
-                        <button className= "btn btn-primary login__button" onClick={handleSubmit}>Login</button>
+                        <button className= "btn btn-warning login__button" onClick={handleSubmit}>Login</button>
                         <Link to="/signup">
-                            <button className= "btn btn-primary login__button">Sign Up</button>
+                            <button className= "btn btn-warning login__button">Sign Up</button>
                         </Link>
                     </div>
         </div>

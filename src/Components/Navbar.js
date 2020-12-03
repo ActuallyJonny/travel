@@ -68,11 +68,10 @@ function Navbar() {
                     </Link>
                     <Link to={!user?"/login":"/"}>
                         <div className="buttons__login">
-                            <Link to = {user?"/user/"+user.id:"/"}>
+                            <Link to = {user?"/user/"+user.id:"/login"}>
                                 <strong className="hello__user">Hello {user_det?.fName}</strong>
                             </Link>
                                 <strong  className="sign__user" onClick={logout}>{user?'Sign Out':'Sign in'}</strong>
-                            {/* <p style={{fontSize: "0.75rem"}}>Signup</p> */}
                         </div>
                     </Link>
                     <Link to ="/about">
