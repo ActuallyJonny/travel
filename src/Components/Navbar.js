@@ -61,9 +61,9 @@ function Navbar() {
                         </Link>
                 </div>
                 <div className = "navbar__buttons">
-                    <Link to ="/bookings">
+                    <Link to ="/browse">
                         <div className="buttons__bookings">
-                            <strong>Bookings</strong>
+                            <strong>Browse</strong>
                         </div>
                     </Link>
                     <Link to={!user?"/login":"/"}>

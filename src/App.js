@@ -10,6 +10,8 @@ import SearchResults from './SearchResults';
 import { transitions, positions, Provider as AlertProvider } from 'react-alert'
 import AlertTemplate from 'react-alert-template-oldschool-dark'
 import Hotel from './Hotel';
+import Browse from './Components/Browse.js';
+
 const options = {
   timeout: 2000,
   transition: transitions.FADE
@@ -35,6 +37,10 @@ function App()  {
             <Route path = "/search/:query"render={(props) => <SearchResults {...props} />}>
             </Route>
             <Route path="/hotel/:id" render={(props) => <Hotel {...props} />}>
+            </Route>
+            <Route path="/browse">
+              <Navbar/>
+              <Browse/>
             </Route>
             <Route path = "/">
               <Navbar />

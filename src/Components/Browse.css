@@ -1,0 +1,12 @@
+.browse-info {
+    padding: 20px;
+    }
+  
+  .browse-info > p {
+    margin-bottom: 10px;
+    font-size: 14px;
+    }
+  
+  .browse-info > h1 {
+    margin-bottom: 30px;
+    }
