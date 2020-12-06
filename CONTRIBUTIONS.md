@@ -9,7 +9,7 @@
 - Complete Frontend Template
 
 ## Adwaiya:
-- Frontend-Backend Linking
+- Navbar, Login/Signup pages, Auth, Auth trace, Dynamic Hotel Links, Dynamic Search Links, implemented Search functionality, added Review functionality, added Datepicker functionality, handled GET/POST requests, About Us Page, Browse Functionality
 
 ## Citations:
 - MERN Tutorial (https://medium.com/@beaucarnes/learn-the-mern-stack-by-building-an-exercise-tracker-mern-tutorial-59c13c1237a1)
