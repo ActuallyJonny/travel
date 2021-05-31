@@ -1,8 +1,6 @@
 export const initialState = {
     user: null,
-    // user_det: null,
 };
-
 
 
 function reducer(state, action) {
@@ -15,17 +13,13 @@ function reducer(state, action) {
             return {
                 user: action.item,
             }
-        // case "SET_USER_DET":
-        //     return{
-        //         user_det: action.item,
-        //     }
         case "REM_USER":
+            localStorage.removeItem('token');
+            localStorage.removeItem('userID');
             return{
                 user: null,
-                // user_det: null,
             }
         default:
-            
             return state;
     }
 }

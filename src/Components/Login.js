@@ -34,16 +34,20 @@ function Login() {
 
         res.on("end", function () {
             const body = Buffer.concat(chunks);
-            const bodyString = JSON.parse(body)
-            console.log(bodyString)
-            const userID = bodyString.message?bodyString.message._id:null
-            console.log(userID);
+            const bodyString = JSON.parse(body);
+            console.log(bodyString);
             if (res.statusCode!==200){
                 alert.show(_.lowerCase(body.toString()))
             }
             else{
+                const token  = bodyString.token?bodyString.token:null;
+                const userID = bodyString.message?bodyString.message._id:null;
+                localStorage.setItem('token', token);
+                localStorage.setItem('userID', userID);
+                const getToken = localStorage.getItem('token');
+                const getUserID = localStorage.getItem('userID');
                 alert.show("You have been logged in!")
-                addUser(userID)
+                addUser(getUserID)
                 history.push("/")
             }
         });

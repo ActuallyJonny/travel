@@ -3,8 +3,10 @@ import './Signup.css';
 import {Link} from "react-router-dom";
 import { useAlert } from 'react-alert';
 import { useHistory } from "react-router-dom";
+import { useStateValue } from "./StateProvider.js";
 
 function Signup() {
+    const[{},dispatch] = useStateValue();
     const http = require('follow-redirects').http;
     const _ = require('lodash')
     const alert = useAlert();
@@ -28,18 +30,31 @@ function Signup() {
 
         res.on("end", function (chunk) {
             const body = Buffer.concat(chunks);
-            const bodyString = body.toString()
-            console.log(bodyString);
+            const bodyString = body.toString();
+            const json = JSON.parse(body);
             if (res.statusCode!==200){
                 alert.show(_.lowerCase(bodyString))
             }
             else{
+                const userID = json.result?json.result._id:null;
+                localStorage.setItem('userID', userID);
+                const getUserID = localStorage.getItem('userID');
+                console.log("GETUSERID", getUserID)
+                addUser(getUserID);
                 alert.show("Signup Successful!")
                 history.push("/");
             }
         });
     });
-
+    const addUser = (userID) => {
+        dispatch({
+            type: 'SET_USER',
+            item: {
+                email: formData.email,
+                password: formData.password,
+                id: userID
+        }, });
+    };
     const initialFormData = Object.freeze({
         email: "",
         password: "",
@@ -55,7 +70,7 @@ function Signup() {
         e.preventDefault()
         console.log(formData)
         const postData = JSON.stringify({"email":formData.email,"password":formData.password,"password_confirmation":formData.password_confirmation,"firstName":formData.fName,"lastName":formData.lName});
-
+        console.log(postData)
         req.write(postData);
 
         req.end();

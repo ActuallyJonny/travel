@@ -1,6 +1,4 @@
 import React, { createContext, useContext, useReducer } from "react";
-// setup data layer
-// trackigng cart
 
 // Data Layer
 export const StateContext = createContext();
